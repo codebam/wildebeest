@@ -12,6 +12,7 @@ export interface Result<T = unknown> {
 export interface Database {
 	prepare(query: string): PreparedStatement
 	dump(): Promise<ArrayBuffer>
+	close(): Promise<void>
 	batch<T = unknown>(statements: PreparedStatement[]): Promise<Result<T>[]>
 	exec<T = unknown>(query: string): Promise<Result<T>>
 	qb: QueryBuilder

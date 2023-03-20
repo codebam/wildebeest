@@ -23,6 +23,7 @@ export default {
 	async queue(batch: MessageBatch<MessageBody>, env: Env, ctx: ExecutionContext) {
 		const sentry = initSentryQueue(env, ctx)
 		const db = await getDatabase(env)
+		console.log('batch of ' + batch.messages.length + ' messages')
 
 		try {
 			for (const message of batch.messages) {
@@ -50,6 +51,12 @@ export default {
 				sentry.captureException(err)
 			}
 			console.error(err.stack, err.cause)
+		}
+
+		try {
+			await db.close()
+		} catch (err: any) {
+			console.warn('failed to close the conneciton', err)
 		}
 	},
 }
