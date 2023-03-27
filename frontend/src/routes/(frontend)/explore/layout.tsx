@@ -48,9 +48,6 @@ export default component$(() => {
 				</h2>
 			</StickyHeader>
 			{/* <div class="bg-wildebeest-800 flex justify-around">{links.map((link) => renderNavLink(link))}</div> */}
-			<div class="flex-auto flex flex-col">
-				<Slot />
-			</div>
 		</div>
 	)
 })
