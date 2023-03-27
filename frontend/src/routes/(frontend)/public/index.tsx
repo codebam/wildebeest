@@ -33,22 +33,6 @@ export default component$(() => {
 					<span>Federated timeline</span>
 				</div>
 			</StickyHeader>
-			<StatusesPanel
-				initialStatuses={statuses}
-				fetchMoreStatuses={$(async (numOfCurrentStatuses: number) => {
-					let statuses: MastodonStatus[] = []
-					try {
-						const response = await fetch(`/api/v1/timelines/public?offset=${numOfCurrentStatuses}`)
-						if (response.ok) {
-							const results = await response.text()
-							statuses = JSON.parse(results)
-						}
-					} catch {
-						/* empty */
-					}
-					return statuses
-				})}
-			/>
 		</>
 	)
 })
